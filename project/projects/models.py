@@ -32,10 +32,10 @@ class Project(models.Model):
     titel = models.CharField(max_length=50)
     descriptin = models.TextField()
     status = models.IntegerField(choices=ProjectStatus.choices , default=ProjectStatus.PENDING)
-    created_at = models.DateTimeField(auto_now_add=False)
-    updated_at = models.DateTimeField(auto_now=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE , null=True)
 
     class Meta:
         verbose_name = ("Project")

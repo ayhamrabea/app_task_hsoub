@@ -1,0 +1,14 @@
+
+
+{% block contect %}
+
+    <h3> my projects</h3>
+    <ul>
+        {% for project in object_list %}
+            <li> {{project.titel}}</li>
+        {% empty %}
+            <li> there are no projects to show</li>
+        {% endfor %}
+    </ul>
+
+{% endblock contect %}
