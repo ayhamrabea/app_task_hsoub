@@ -30,7 +30,7 @@ class ProjectStatus(models.IntegerChoices):
 class Project(models.Model):
 
     titel = models.CharField(max_length=50)
-    descriptin = models.TextField()
+    description = models.TextField()
     status = models.IntegerField(choices=ProjectStatus.choices , default=ProjectStatus.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -48,9 +48,9 @@ class Project(models.Model):
 
 class Task(models.Model):
 
-    descriptin = models.TextField()
+    description = models.TextField()
     us_completed = models.BooleanField(default=False)
-    project = models.OneToOneField(Project,  on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     
 
     class Meta:
@@ -58,5 +58,5 @@ class Task(models.Model):
         verbose_name_plural = ("Tasks")
 
     def __str__(self):
-        return self.descriptin
+        return self.description
 

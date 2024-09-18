@@ -1,0 +1,25 @@
+
+
+<ul>
+    {% for task in project.task_set.all %}
+        <li>
+            <form method = 'post' action="{% url 'Task_update' task.id %}">
+                {% csrf_token %}
+                <input type='checkbox'  name='us_completed' {% if task.us_completed%} checked {% endif %} onchange = 'this.form.submit()' />
+                {{task.description}} 
+            </form>
+            <form method = 'post' action="{% url 'Task_delete' task.id %}">
+                {% csrf_token %}
+                 <button type='submit'> Delete </button>
+            </form>
+        </li> 
+    {% endfor %}
+</ul>
+
+<form method = 'post' action="{% url 'Task_Create' %}">
+    {% csrf_token %}
+    <input type='hidden' value='{{project.id}}' name='project' />
+    <input type='text'  name='description'  placeholder = 'new task'/>
+    <input type='submit' value='add' />
+</form>
+
