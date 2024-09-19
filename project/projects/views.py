@@ -32,7 +32,7 @@ class ProjectUpdateView(UpdateView):
 
 class ProjectDeleteView(DeleteView):
     model = Project
-    # template_name = 'project/delete.html'    نحتاج الى اضافة صفحة
+    template_name = 'project/delete.html'    
     success_url = reverse_lazy('Project_list')
 
 

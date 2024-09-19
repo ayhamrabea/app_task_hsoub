@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block contect %}
+    <h2>{% trans 'Alert' %} </h2>
+    <form method = 'post'>
+        {% csrf_token %}
+        <p class="text-muted my-4">
+            Are you sure ? {{project.titel}}
+        </p>
+        {{ form }}
+        <input class="btn btn-danger" type='submit' value='{% trans "Delete" %}' />
+    </form>
+
+{% endblock contect %}

@@ -1,7 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
 
 
 {% block contect %}
 
+
+    <div class="d-flex">
+        <h3 class="me-auto"> My Projects</h3>
+        <div>
+            <a href="{% url 'Project_Create'%}" class="btn btn-outline-success">
+                <i class="bi bi-plus-lg"> </i> New Project
+            </a>
+        </div>
+    </div>
+
+    <div class="row my-5">
+
+        {% for project in object_list %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <span class="badge rounded-pill bg-dark my-2">{{project.get_status_display}}</span>
+                    <h5 class="card-title my-2">{{project.titel}}</h5>
+                    <p class="card-text my-2">{{project.description}}</p>
+                    <div class="d-flex my-3">
+                        <span class="me-auto text-muted small">
+                            <i class="bi bi-clock"></i>
+                            <time datetime="{{project.created_at}}">
+                                {{project.created_at|naturaltime}}
+                            </time>
+                        </span>
+                    </div>
+                    <a href="{% url 'Project_Update' project.id  %}" class="btn btn-sm btn-outline-dark mx-1">Edit</a>
+                    <a href="{% url 'Project_delete' project.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="h100 p-5 bg-white border rounded-3 text-center">
+                <p> there are no projects to show</p>
+                <a href="{% url 'Project_Create'%}" class="btn btn-success">
+                    <i class="bi bi-plus-lg"> </i> + New Project
+                </a>
+            </div>
+        </div>
+            
+        {% endfor %}
+
+    </div>
+    <!--
     <h3> my projects</h3>
     <ul>
         {% for project in object_list %}
@@ -10,5 +57,5 @@
             <li> there are no projects to show</li>
         {% endfor %}
     </ul>
-
+    -->
 {% endblock contect %}
