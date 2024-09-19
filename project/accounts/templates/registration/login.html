@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block contect %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="card col-md-6 px-0">
+                <div class="card-header">
+                    <h3 class="mb-0 py-2">{% trans 'Login'%}</h3>
+                </div>
+                <div class="card-body">
+                    <form method = 'POST'>
+                        {% csrf_token %}
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Username</label>
+                              <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">Password</label>
+                              <input type="password" class="form-control" name="password" autocomplete="current-password" required="" id="id_password">
+                            </div>
+                        <button class="btn btn-success"> {% translate 'Login' %}</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    
+
+{% endblock contect %}
+
+
+
+
+
+<!-- {% include "common/form.html" with form=form %} -->

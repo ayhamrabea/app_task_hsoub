@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-success bg-gradient p-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'Project_list'%}">Projects Managment</a>
@@ -7,13 +9,28 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Project_list">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'Project_list' %}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{user.username}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout11' %}">logout</a></li>
+            </ul>
           </li>
         </ul>
-        <form action="{% url 'Project_list' %}" class="d-flex" method="get">
-          <input class="form-control me-2" type="search" placeholder="Search" value="{{request.GET.q}}" aria-label="Search" name="q">
-          <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>
+        {% if user.is_authenticated %}
+          <form action="{% url 'Project_list' %}" class="d-flex" method="get">
+            <input class="form-control me-2" type="search" placeholder="Search" value="{{request.GET.q}}" aria-label="Search" name="q">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+          {% else %}
+            <a class="btn btn-outline-light" href="{% url 'login' %}">
+              {% trans 'login' %}
+            </a>
+        {% endif %}
       </div>
     </div>
   </nav>
