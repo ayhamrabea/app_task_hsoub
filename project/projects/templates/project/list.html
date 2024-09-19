@@ -18,7 +18,7 @@
     <div class="row my-5">
 
         {% for project in object_list %}
-            <div class="card" style="width: 18rem;">
+            <div class="card m-3 col-3">
                 <div class="card-body">
                     <span class="badge rounded-pill bg-dark my-2">{{project.get_status_display}}</span>
                     <h5 class="card-title my-2">{{project.titel}}</h5>
@@ -46,6 +46,42 @@
         </div>
             
         {% endfor %}
+
+        
+        {% if page_obj.paginator.count > 0 %}
+            <div class="d-flex justify-content-center bd-highlight mb-3">
+                <nav>
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number}}">
+                                        {% trans 'Previous' %}
+                                    </a>
+                                </li> 
+                            {%else%}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">
+                                        {% trans 'Previous' %}
+                                    </a>
+                                </li>          
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number}}">
+                                        {% trans 'Next' %}
+                                    </a>
+                                </li> 
+                            {%else%}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">
+                                        {% trans 'Next' %}
+                                    </a>
+                                </li>          
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
 
     </div>
     <!--
